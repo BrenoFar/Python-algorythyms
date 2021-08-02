@@ -9,7 +9,7 @@ def combsort(num):                 #Defining combsort as a function
                 num[i], num[j] = num[j], num[i]
 
  
-num_list = [75, 16, 55, 19, 48, 14, 2, 61, 22, 100]     #A pre-made list with 10 indexe
+num_list = [75, 16, 55, 19, 48, 14, 2, 61, 22, 100]     #A pre-made list with 10 indexes
 lista = []                                              #Empty list that we add some values
 print('Choose one of those options!')
 print('1- Pre-made list')
