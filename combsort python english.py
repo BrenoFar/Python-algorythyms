@@ -1,12 +1,15 @@
 from random import randrange 
 def combsort(num):                 #Defining combsort as a function
     gap = len(num)
-    while gap > 1:
+    swaps=True
+    while gap > 1 or swaps:
         gap = max(1, int(gap / 1.25))  # minimum gap is 1
+        swaps=False                    #Turning off just to verify if had the swap
         for i in range(len(num) - gap):
             j = i+gap
             if num[i] > num[j]:
                 num[i], num[j] = num[j], num[i]
+                swaps=True           
 
  
 num_list = [75, 16, 55, 19, 48, 14, 2, 61, 22, 100]     #A pre-made list with 10 indexes
