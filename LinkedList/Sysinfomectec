@@ -1,0 +1,53 @@
+from Linkedlist2 import LinkedList
+import os
+import tkinter
+from tkinter import messagebox
+
+lista=LinkedList()
+
+root=tkinter.Tk()       #Esconder a tela do tkinter
+root.withdraw()
+            
+p=0
+
+while  p>=0 or p<=5:
+    try:
+        os.system('cls')
+        print("========== SISTEMA INFOMEC TÉCNICO ==========")
+        p=int(input("1- Adicionar produto na lista de reparos\n2- Remover produto da lista\n3- Declarar produto como reparado\n4- Ver lista de reparo\n5- Sair\nInsira uma das opções: "))
+        while p>=1 and p<=4:
+            if p==1:
+                os.system('cls')
+                p1=int(input("\nQual o produto você quer adicionar a lista?\n Digite o n° da Ordem de Serviço: "))
+                lista.append(p1)
+                messagebox.showinfo("Adicionado!!","Produto com O.S:{} adicionado a lista...".format(p1))
+                p=0
+
+            if p==2:
+                os.system('cls')
+                p1=int(input("\nQual item você quer remover da lista?\nDigite o n° da Ordem de Serviço: "))
+                lista.remove(p1)
+                messagebox.showinfo("Removido!","Produto com O.S:{} removido da lista.".format(p1))
+                p=0
+
+            if p==3:
+                os.system('cls')
+                p1=int(input("\nQual item da lista você quer declarar?\nDigite o n° da Ordem de Serviço: "))
+                messagebox.showinfo("Reparado!!","O produto de O.S: {} foi reparado com sucesso...".format(p1))
+                lista.remove(p1)
+
+                p=0
+            if p==4:
+                os.system('cls')
+                print("===== Lista dos produtos =====")
+                print(lista)
+                print("A lista possui {} produto(s)".format(lista._size))
+                r=input("\nRetornar ao menu? S/N: ")
+                if r.upper()=='S':
+                    p=0
+
+        else:
+            if p==5:
+                break
+    except ValueError:
+        print("Insira o formato correto")
