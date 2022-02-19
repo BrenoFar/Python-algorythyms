@@ -1,1 +1,116 @@
 
+from Fila12 import Fila1,Fila2
+import os
+
+Receb=Fila1()
+Finaliz=Fila2()
+
+print('============ Bem vindo a INFOMEC Reparos ============')
+
+opcao=0
+while opcao>=0 or opcao<=5:
+    try:
+        os.system('cls')
+        print('\n============MENU DE ATENDIMENTO DO RECEPCIONISTA/TÉCNICO============')
+        opcao=int(input('\n 1- Inserir produto na lista de Recebidos\n 2- Remover produto da lista de Recebidos\n 3- Mostrar lista de Recebidos\n 4- Finalizar os pedidos e levar para fila de devolução\n 5- Entregar Produto finalizado\n 6- Fechar o programa\nInsira sua opção: '))
+        while opcao>=1 and opcao<=5:
+            if opcao==1:
+                os.system('cls')
+                OS=int(input('Insira o n° da OS (Ordem de Serviço): '))
+                Receb.insere(OS)
+                print('\nA OS de N°{0} foi inserida com sucesso.'.format(OS))
+                opcao=0
+
+            if opcao==2:
+                os.system('cls')
+                if Receb.vazia():
+                    print('\nA fila de produtos está vazia.')
+                    opcao=0
+                    break
+                if  Receb.vazia!=0:
+                    p1=input('\nDeseja remover algum produto em especifico? S/N: ')
+                    while p1.upper()!='S' and p1.upper()!='N':
+                        p1=input('Digite S ou N: ')
+                    if p1.upper()=='S':
+                        print(Receb.fila1)
+                        p2=int(input('\nDigite qual produto de que posição você quer remover? '))
+                        if p2>len(Receb.fila1):
+                            os.system('cls')
+                            print('Cite posições existentes na fila:1 a {0}'.format(len(Receb.fila1)))
+                            opcao=0
+                            break
+                        Receb.fila1.pop(p2-1)
+                        input('\nProduto excluido com sucesso. Aperte em qualquer lugar para continuar...')
+                        opcao=0
+                    if p1.upper()=='N':
+                        os.system('cls')
+                        Receb.retira()
+                        print('\nO primeiro produto da lista foi removido com sucesso.')
+                        opcao=0
+            if opcao==3:
+                os.system('cls')
+                print('\nSegue os produtos por ordem de cadastro e sua O.S OBS: O.S = (Ordem de Serviço)..')
+                print(Receb.fila1)
+                opcao=0
+
+            if opcao==4:
+                p1=0
+                while p1>=0 and p1<=1:
+                    p2=0
+                    while p2>=0 and p2<=2:
+                        
+                        p2=int(input('1- Declarar todos os produtos como prontos\n2- Declarar produto específico como pronto\n Insira sua opção:  '))
+                        if p2==1:
+                            Finaliz.fila2.extend(Receb.fila1)
+                            if Receb.vazia():
+                                os.system('cls')
+                                print('A fila de recebidos está vazia. Retornando ao menu.')
+                                p2=3
+                                p1=2
+                                opcao=0
+                                break
+                            os.system('cls')
+                            print('\nSegue a fila de recebimento antes de ir para finalizado:\n',Receb.fila1)
+                            for i in range (0,len(Receb.fila1)):
+                                Receb.retira()
+                            print('\nSegue a fila de Recebimento atual:\n',Receb.fila1,'\nSegue a Fila atual para Devolução:\n',Finaliz.fila2)
+                            print('MOVIDOS TODOS DA FILA DE RECEBIDO!!')
+                            p2=3
+                        if p2==2:
+                            if Receb.vazia():
+                                os.system('cls')
+                                print('A fila de recebidos está vazia. Retornando ao menu.')
+                                p2=3
+                                p1=2
+                                opcao=0
+                                break
+                            os.system('cls')
+                            print(Receb.fila1)
+                            p3=int(input('Digite a posição que o produto se encontra: '))
+                            Finaliz.fila2.append(Receb.fila1[p3-1])
+                            Receb.fila1.pop(p3-1)
+                            print('Fila de Recebido após produto declarado como pronto.\n{0}\n'.format(Receb.fila1))
+                            print('Fila de Produtos prontos para entrega\n{0}\n'.format(Finaliz.fila2))
+                            p2=3
+                        
+                        p1=2
+                opcao=0
+
+            if opcao==5:
+                os.system('cls')
+                p1==False #Testando se a lista está vazia
+                if Finaliz.vazia()==False:
+                    print(Finaliz.fila2,'----Antes')
+                    Finaliz.retira()
+                    print(Finaliz.fila2,'----Depois')
+                if Finaliz.vazia()==True:
+                    print('\nA Fila de Produtos para entregar está vazia.\nRetornando ao menu.\n')
+                opcao=0
+        else:
+            if opcao==6:
+                break
+
+    except ValueError:
+        print('\nO valor do número tem que ser número inteiro.\n')
+        opcao=0
+
