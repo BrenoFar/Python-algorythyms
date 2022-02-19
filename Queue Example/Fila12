@@ -1,0 +1,25 @@
+class Fila1:
+    def __init__(self):
+        self.fila1 = []
+ 
+    def insere(self, elemento):
+        self.fila1.append(elemento)
+
+    def retira(self):
+        return self.fila1.pop(0)
+ 
+    def vazia(self):
+        return len(self.fila1) == 0
+
+class Fila2:
+    def __init__(self):
+        self.fila2 = []
+ 
+    def insere(self, elemento):
+        self.fila2.append(elemento)
+
+    def retira(self):
+        return self.fila2.pop(0)
+ 
+    def vazia(self):
+        return len(self.fila2) == 0
