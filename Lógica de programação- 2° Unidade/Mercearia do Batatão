@@ -1,0 +1,153 @@
+
+import sys,time
+def print_slow(str):               #Definindo uma função apenas pra printar lento na tela
+    for c in str:
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(0.05)
+
+print_slow('Mercearia do Batatão \nBem vindo.')
+
+print_slow('\nA seguir será mostrado as seções da loja \n')
+
+frutas = {
+'Banana': 0.50, 
+'Maca': 0.65, 
+'Abacaxi':1.2, 
+'Laranja':0.55, 
+'Limao': 0.25, 
+'Manga': 0.65,
+'Melao': 1.25, 
+'Pera': 0.55,
+'Tangerina':0.59,
+'Uva':3.50,
+}
+
+Alimentos = {
+'Arroz': 7.00,
+'Feijao': 9.00,
+'Farinha': 1.50,
+'Leite':1.25,
+'Macarrao':1.25,
+'Oleo':3.25,
+'Sal':2.50
+}
+
+Higpessoal = {
+'Agua oxigenada(med)': 2.50,
+'Creme dental(und)': 0.75,
+'Desodorante(und)': 1.25,
+'Escova de dente': 9.99,
+'Fio dental': 9.99,
+'Sabonete(und)':2.25,
+'Shampoo(und)':6.50,
+'Condicionador(und)':5.50,
+}
+
+cplist=[00000000000]
+
+print('\n ============SEÇÕES===========')
+
+print('Frutas - 1')
+print('Alimentos - 2')
+print('Higpessoal - 3')
+
+p1=int(input('Insira o valor de p1 : '))
+
+print('')
+c1=0
+c2=0
+c3=0
+
+while p1 !=1 and p1!=2 and p1!=3 and p1!=4:
+    print_slow('Valor Incorreto...\n')
+    p1=int(input('Digite os valores das seções: '))
+
+while p1 == 1 or p1 ==2 or p1 == 3 or p1 == 4:
+    if p1 == 1:
+        print_slow('SEÇÃO DE FRUTAS\n')
+
+        for item in frutas:
+            print(item)
+            print ('Preço R$ = {:.2f}'.format(float(frutas[item])))
+            fruitsell=input('Gostaria de pegar esta fruta? S/N: ')
+            if fruitsell == 'S':
+                qtd=int(input('Quantas dessa fruta você pegará: '))
+                precofrut=frutas[item]*qtd
+                print('Valor Total= R${0:.2F}\n'.format(precofrut))
+                c1=c1+precofrut
+            elif fruitsell == 'N':
+                print('====================')
+            elif fruitsell != 'S' or fruitsell !='N':
+                print('====================')
+        print('O valor total na seção de frutas: R${:.2f}\n'.format(c1))
+        p1=int(input('Gostaria de ir para alguma seção?\n2 - Alimentos\n3 - Higiene Pessoal\n4 - Ir para o caixa.\n R: '))
+        
+
+        
+    if p1 == 2:
+
+        print_slow('SEÇÃO DE ALIMENTOS\n')
+        for item in Alimentos:
+            print(item)
+            print ('Preço R$ = {:.2f}'.format(float(Alimentos[item])))
+            foodsell=input('Gostaria de pegar? S/N: ')
+            if foodsell == 'S':
+                qtd=int(input('Quantas unidades pegar: '))
+                precofood=Alimentos[item]*qtd
+                print('Valor Total= R${0:.2F}\n'.format(precofood))
+                c2=c2+precofood
+            elif foodsell == 'N':
+                print('====================')
+            elif foodsell != 'S' or foodsell !='N':
+                print('====================')
+        print('O valor total na seção de alimentos: R${:.2f}'.format(c2))
+        p1=int(input('Gostaria de ir para alguma seção?\n1 - Frutas\n3 - Higiene Pessoal\n4 - Ir para o caixa.\n R: '))
+        
+    if p1 == 3:
+        print_slow('SEÇÃO DE HIGIENE PESSOAL\n')
+        for item in Higpessoal:
+            print(item)
+            print ('Preço R$ = {:.2f}'.format(float(Higpessoal[item])))
+            higsell=input('Gostaria de pegar esta fruta? S/N: ')
+            if higsell == 'S':
+                qtd=int(input('Quantas dessa fruta você pegará: '))
+                precohig=Higpessoal[item]*qtd
+                print('Valor Total= R${:.2f}\n'.format(precohig))
+                c3=c3+precohig
+            elif higsell == 'N':
+                print('====================')
+            elif higsell != 'S' or fruitsell !='N':
+                print('====================')
+        print('O valor total na seção de Higiene Pessoal: R${:.2f}'.format(c3))
+        p1=int(input('Gostaria de ir para alguma seção?\n1 - Frutas\n2 - Alimentos\n4 - Ir para o caixa.\n R: '))
+    
+    if p1 == 4:
+
+        precototal=c1+c2+c3
+        print_slow('\nO preço total é: R${:.2f}'.format(precototal))
+        if precototal==0:
+            print_slow('\nNão houve compra na loja \nObrigado e volte sempre!!!')
+            break
+
+        comprafinal=input('\nGostaria de se cadastrar com CPF e garantir um desconto de 5%?\nOBS:NÃO VAMOS TE FILIAR A PARTIDO NENHUM (S/N): ')
+        if comprafinal == 'S' or comprafinal =='s':
+            CPF=int(input('Insira o seu CPF: '))
+            cplist.append(CPF)
+            if len(cplist) != len(set(cplist)):
+                print('CPF JÁ CADASTRADO... DESCONTO REVOGADO.')
+                print_slow('\nO desconto não foi aplicado...')
+                print('R$:{:.2f}'.format(precototal))
+                break
+            else:
+                print('CPF CADASTRADO. DESCONTO APLICADO')
+                desc=precototal*0.05
+                precofinal=precototal-desc
+                print('\nO valor com desconto aplicado:R${:.2f}'.format(precofinal))
+                break
+        else:
+            print_slow('\nO preço total é: R${:.2f}'.format(precototal))
+            break
+
+
+
